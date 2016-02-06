@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DashWallet</title>
+</head>
+<body>
+
+<h1>Dash Wallet</h1>
+
+<script src="socket.io.js"></script>
+<script>
+    var socket = io('http://localhost:5000');
+    socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+        });
+</script>
+
+</body>
+</html>
