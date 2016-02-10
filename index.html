@@ -5,17 +5,66 @@
     <title>DashWallet</title>
 </head>
 <body>
-
-<h1>Dash Wallet</h1>
-
+Requesting...
 <script src="socket.io.js"></script>
 <script>
+    // Example DAPI response from web sockets
+    //=====================================
+    /*
     var socket = io('http://localhost:5000');
     socket.on('news', function (data) {
         console.log(data);
         socket.emit('my other event', { my: 'data' });
         });
-</script>
+    */
 
+    // Example DAPI REST request using CORS
+    //=====================================
+
+    // Create the XHR object.
+    function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+            // XHR for Chrome/Firefox/Opera/Safari.
+            xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+            // XDomainRequest for IE.
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+        } else {
+            // CORS not supported.
+            xhr = null;
+        }
+        return xhr;
+    }
+
+    // call getInfo from DAPI
+    function testDAPIRequest() {
+        // test URL
+        var url = 'http://localhost:5000/api/getInfo';
+
+        var xhr = createCORSRequest('GET', url);
+        if (!xhr) {
+            alert('CORS not supported');
+            return;
+        }
+
+        // Response handlers.
+        xhr.onload = function() {
+            var text = xhr.responseText;
+            document.write(text);
+        };
+
+        xhr.onerror = function() {
+            alert('Request error');
+        };
+
+        xhr.send();
+    }
+
+    // test
+    testDAPIRequest();
+
+</script>
 </body>
 </html>
