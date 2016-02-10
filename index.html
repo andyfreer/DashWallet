@@ -40,8 +40,8 @@ Requesting...
 
     // call getInfo from DAPI
     function testDAPIRequest() {
-        // test URL
-        var url = 'http://localhost:5000/api/getInfo';
+
+        var url = 'http://localhost:5000/api/v1/getInfo';
 
         var xhr = createCORSRequest('GET', url);
         if (!xhr) {
@@ -56,7 +56,7 @@ Requesting...
         };
 
         xhr.onerror = function() {
-            alert('Request error');
+            document.write('xhr error');
         };
 
         xhr.send();
